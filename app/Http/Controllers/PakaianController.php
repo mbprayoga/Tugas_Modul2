@@ -39,24 +39,23 @@ class PakaianController extends Controller
     public function index()
     {
         $datas = DB::table('Pakaian')
-        ->join('Transaksi', 'Pakaian.ID_Pakaian', '=', 'Transaksi.ID_Pakaian')
+        ->leftJoin('Transaksi', 'Pakaian.ID_Pakaian', '=', 'Transaksi.ID_P')
         ->select('Pakaian.*', 'Transaksi.*')
         ->get();
 
-    return view('pakaian.index')->with('datas', $datas);
+        return view('pakaian.index')->with('datas', $datas);
     }
     // public function edit a row from a table
     public function edit($id)
     {
         $data = DB::table('pakaian')->where('Id_Pakaian', $id)->first();
-        return view('pakaian.edit')->with('data', $data);
+        return view('pakaian.edit', compact('id'))->with('data', $data);
     }
 
     // public function to update the table value
     public function update($id, Request $request)
     {
         $request->validate([
-            'ID_Pakaian' => 'required',
             'Brand' => 'required',
             'Harga' => 'required',
             'Kategori' => 'required',
@@ -65,9 +64,8 @@ class PakaianController extends Controller
         ]);
 
         DB::update(
-            'UPDATE pakaian SET ID_Pakaian = :ID_Pakaian, Brand = :Brand, Harga = :Harga, Kategori = :Kategori, Ukuran = :Ukuran, Warna = :Warna WHERE ID_Pakaian = :ID_Pakaian',
+            'UPDATE pakaian SET Brand = :Brand, Harga = :Harga, Kategori = :Kategori, Ukuran = :Ukuran, Warna = :Warna WHERE ID_Pakaian = :ID_Pakaian',
             [
-                'ID_Pakaian' => $request->ID_Pakaian,
                 'Brand' => $request->Brand,
                 'Harga' => $request->Harga,
                 'Kategori' => $request->Kategori,
@@ -81,8 +79,28 @@ class PakaianController extends Controller
     // public function to delete a row from a table
     public function delete($id)
     {
+        DB::delete('DELETE FROM transaksi WHERE ID_P = :ID_P', ['ID_P' => $id]);
         DB::delete('DELETE FROM pakaian WHERE ID_Pakaian = :ID_Pakaian', ['ID_Pakaian' => $id]);
         return redirect()->route('pakaian.index')->with('success', 'Data Pakaian berhasil dihapus');
     }
+    
+    public function search(Request $request)
+{
+    $query = $request->input('query');
 
+    $datas = DB::table('pakaian')
+        ->leftJoin('transaksi', 'pakaian.ID_Pakaian', '=', 'transaksi.ID_P')
+        // Add more join statements if needed
+        ->where('pakaian.Brand', 'LIKE', '%' . $query . '%')
+        ->orWhere('pakaian.Kategori', 'LIKE', '%' . $query . '%')
+        ->orWhere('pakaian.Ukuran', 'LIKE', '%' . $query . '%')
+        ->orWhere('pakaian.Warna', 'LIKE', '%' . $query . '%')
+        ->orWhere('transaksi.Tanggal_Transaksi', 'LIKE', '%' . $query . '%')
+        ->orWhere('transaksi.Total_Harga', 'LIKE', '%' . $query . '%')
+        ->orWhere('transaksi.Metode_Pembayaran', 'LIKE', '%' . $query . '%')
+        // Add additional conditions for other joined tables if needed
+        ->get();
+
+    return view('pakaian.index', compact('datas'));
+}
 }

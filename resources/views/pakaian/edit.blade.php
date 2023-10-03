@@ -16,29 +16,28 @@
 
 <div class="card mt-4">
     <div class="card-body">
-        <h5 class="card-title fw-bolder mb-3">Ubah Data Admin</h5>
-        <form method="post" action="{{ route('pakaian.update', $data->id_admin) }}">
+        <h5 class="card-title fw-bolder mb-3">Ubah Data Pakaian</h5>
+        <form method="post" action="{{ route('pakaian.update', $data->ID_Pakaian) }}">
             @csrf
             <div class="mb-3">
-                <label for="id_admin" class="form-label">ID Admin</label>
-                <input type="text" class="form-control" id="id_admin" name="id_admin" value="{{ $data->id_admin }}">
+                <label for="Brand" class="form-label">Brand</label>
+                <input type="text" class="form-control" id="Brand" name="Brand">
             </div>
             <div class="mb-3">
-                <label for="nama_admin" class="form-label">Nama Admin</label>
-                <input type="text" class="form-control" id="nama_admin" name="nama_admin"
-                    value="{{ $data->nama_admin }}">
+                <label for="Kategori" class="form-label">Kategori</label>
+                <input type="text" class="form-control" id="Kategori" name="Kategori">
             </div>
             <div class="mb-3">
-                <label for="alamat" class="form-label">Alamat</label>
-                <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $data->alamat }}">
+                <label for="Harga" class="form-label">Harga</label>
+                <input type="text" class="form-control" id="Harga" name="Harga">
             </div>
             <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" name="username" value="{{ $data->username }}">
+                <label for="Ukuran" class="form-label">Ukuran</label>
+                <input type="text" class="form-control" id="Ukuran" name="Ukuran">
             </div>
             <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password">
+                <label for="Warna" class="form-label">Warna</label>
+                <input type="text" class="form-control" id="Warna" name="Warna">
             </div>
             <div class="text-center">
                 <input type="submit" class="btn btn-primary" value="Ubah" />
@@ -48,12 +47,12 @@
 </div>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                    data-bs-target="#hapusModal{{ $data->id_admin }}">
+                    data-bs-target="#hapusModal{{ $data->ID_Pakaian }}">
                     Hapus
                 </button>
 
                 <!-- Modal -->
-                <div class="modal fade" id="hapusModal{{ $data->id_admin }}" tabindex="-1"
+                <div class="modal fade" id="hapusModal{{ $data->ID_Pakaian }}" tabindex="-1"
                     aria-labelledby="hapusModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -62,7 +61,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
-                            <form method="POST" action="{{ route('pakaian.delete', $data->id_admin) }}">
+                            <form method="POST" action="{{ route('pakaian.delete', $data->ID_Pakaian) }}">
                                 @csrf
                                 <div class="modal-body">
                                     Apakah anda yakin ingin menghapus data ini?

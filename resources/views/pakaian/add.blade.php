@@ -17,24 +17,28 @@
         <form method="post" action="{{route('pakaian.store')}}">
             @csrf
             <div class="mb-3">
-                <label for="id_admin" class="form-label">ID Pakaian</label>
-                <input type="text" class="form-control" id="id_admin" name="id_admin">
+                <label for="ID_Pakaian" class="form-label">ID Pakaian</label>
+                <input type="text" class="form-control" id="ID_Pakaian" name="ID_Pakaian">
             </div>
             <div class="mb-3">
-                <label for="nama_admin" class="form-label">Nama Pakaian</label>
-                <input type="text" class="form-control" id="nama_admin" name="nama_admin">
+                <label for="Brand" class="form-label">Brand</label>
+                <input type="text" class="form-control" id="Brand" name="Brand">
             </div>
             <div class="mb-3">
-                <label for="alamat" class="form-label">Alamat</label>
-                <input type="text" class="form-control" id="alamat" name="alamat">
+                <label for="Kategori" class="form-label">Kategori</label>
+                <input type="text" class="form-control" id="Kategori" name="Kategori">
             </div>
             <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" name="username">
+                <label for="Harga" class="form-label">Harga</label>
+                <input type="text" class="form-control" id="Harga" name="Harga">
             </div>
             <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password">
+                <label for="Ukuran" class="form-label">Ukuran</label>
+                <input type="text" class="form-control" id="Ukuran" name="Ukuran">
+            </div>
+            <div class="mb-3">
+                <label for="Warna" class="form-label">Warna</label>
+                <input type="text" class="form-control" id="Warna" name="Warna">
             </div>
             <div class="text-center">
                 <input type="submit" class="btn btn-primary" value="Tambah" />

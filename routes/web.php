@@ -16,16 +16,17 @@ use App\Models\Pakaian;
 |
 */
 
-Route::get('add', [PakaianController::class, 'create'])->name('pakaian.create');
-Route::post('store', [PakaianController::class, 'store'])->name('pakaian.store');
 Route::get('/', [PakaianController::class, 'index'])->name('pakaian.index');
-Route::get('edit/{id}', [PakaianController::class, 'edit'])->name('pakaian.edit');
-Route::post('update/{id}', [PakaianController::class, 'update'])->name('pakaian.update');
-Route::post('delete/{id}', [PakaianController::class, 'delete'])->name('pakaian.delete');
+Route::get('pakaian/add', [PakaianController::class, 'create'])->name('pakaian.create');
+Route::post('pakaian/store', [PakaianController::class, 'store'])->name('pakaian.store');
+Route::get('pakaian/edit/{id}', [PakaianController::class, 'edit'])->name('pakaian.edit');
+Route::post('pakaian/update/{id}', [PakaianController::class, 'update'])->name('pakaian.update');
+Route::post('pakaian/delete/{id}', [PakaianController::class, 'delete'])->name('pakaian.delete');
+Route::get('/pakaian/search', [PakaianController::class, 'search'])->name('pakaian.search');
 
-Route::get('add', [TransaksiController::class, 'create'])->name('pakaian.create');
-Route::post('store', [TransaksiController::class, 'store'])->name('pakaian.store');
-Route::get('edit/{id}', [TransaksiController::class, 'edit'])->name('pakaian.edit');
-Route::post('update/{id}', [TransaksiController::class, 'update'])->name('pakaian.update');
-Route::post('delete/{id}', [TransaksiController::class, 'delete'])->name('pakaian.delete');
+Route::get('transaksi/add/{id}', [TransaksiController::class, 'create'])->name('transaksi.create');
+Route::post('transaksi/store/{id}', [TransaksiController::class, 'store'])->name('transaksi.store');
+Route::get('transaksi/edit/{id}', [TransaksiController::class, 'edit'])->name('transaksi.edit');
+Route::post('transaksi/update/{id}', [TransaksiController::class, 'update'])->name('transaksi.update');
+Route::post('transaksi/delete/{id}', [TransaksiController::class, 'delete'])->name('transaksi.delete');
 
