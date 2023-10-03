@@ -43,21 +43,20 @@ class TransaksiController extends Controller
     public function update($id, Request $request)
     {
         $request->validate([
-            // 'ID_Transaksi' => ' ',
-            // 'ID_P' => ' ',
             'Metode_Pembayaran' => 'required',
             'Tanggal_Transaksi' => 'required',
             'Total_Harga' => 'required',
         ]);
 
         DB::update(
-            'UPDATE transaksi SET Metode_Pembayaran = :Metode_Pembayaran, Tanggal_Transaksi = :Tanggal_Transaksi, Total_Harga = :Total_Harga WHERE ID_Transaksi = :ID_Transaksi',
+            'UPDATE transaksi SET ID_Transaksi = :ID_Transaksi, ID_P = :ID_P, Metode_Pembayaran = :Metode_Pembayaran, Tanggal_Transaksi = :Tanggal_Transaksi, Total_Harga = :Total_Harga WHERE ID_Transaksi = :id',
             [
-                // 'ID_Transaksi' => $id,
-                // 'ID_P' => $id,
+                ':id' => $id,
+                'ID_P' => $id,
                 'Metode_Pembayaran' => $request->Metode_Pembayaran,
                 'Tanggal_Transaksi' => $request->Tanggal_Transaksi,
                 'Total_Harga' => $request->Total_Harga,
+                'ID_Transaksi' => $id, // Make sure to include this as well
             ]
         );
         

@@ -49,7 +49,7 @@ class PakaianController extends Controller
     public function edit($id)
     {
         $data = DB::table('pakaian')->where('Id_Pakaian', $id)->first();
-        return view('pakaian.edit', compact('id'))->with('data', $data);
+        return view('pakaian.edit')->with('data', $data);
     }
 
     // public function to update the table value
@@ -64,15 +64,18 @@ class PakaianController extends Controller
         ]);
 
         DB::update(
-            'UPDATE pakaian SET Brand = :Brand, Harga = :Harga, Kategori = :Kategori, Ukuran = :Ukuran, Warna = :Warna WHERE ID_Pakaian = :ID_Pakaian',
+            'UPDATE pakaian SET ID_Pakaian = :ID_Pakaian, Brand = :Brand, Harga = :Harga, Kategori = :Kategori, Ukuran = :Ukuran, Warna = :Warna WHERE ID_Pakaian = :id',
             [
+                ':id' => $id, // Assuming $id contains the ID value
                 'Brand' => $request->Brand,
                 'Harga' => $request->Harga,
                 'Kategori' => $request->Kategori,
                 'Ukuran' => $request->Ukuran,
-                'Warna' => $request->Warna
+                'Warna' => $request->Warna,
+                'ID_Pakaian' => $id, // Assuming $id contains the ID value
             ]
         );
+        
 
         return redirect()->route('pakaian.index')->with('success', 'Data Pakaian berhasil diubah');
     }
